@@ -1,1 +1,110 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#10131d">
+<title>NEXUS AI Dashboard</title>
+<style>
+*{box-sizing:border-box}
+body{
+ margin:0;background:#10131d;color:#f5f5fa;
+ font-family:Arial,sans-serif;padding:18px;
+}
+header{display:flex;align-items:center;gap:12px;margin-bottom:28px}
+.logo{
+ background:#7564ed;padding:12px;border-radius:13px;
+ font-size:23px
+}
+h1{font-size:21px;margin:0}
+.sub{font-size:11px;color:#9ba3b8;margin-top:5px}
+h2{font-size:25px;margin:25px 0 8px}
+.purple{color:#a99bff}
+p{color:#9ba3b8;font-size:13px;line-height:1.5}
+.panel{
+ background:#1c2232;border:1px solid #30394d;
+ border-radius:15px;padding:15px;margin:15px 0;
+}
+textarea{
+ width:100%;min-height:115px;background:transparent;
+ border:0;outline:0;color:white;font-size:15px;
+ resize:vertical;font-family:inherit;
+}
+button{
+ border:0;border-radius:10px;padding:12px 16px;
+ font-weight:bold;cursor:pointer;
+}
+.ask{background:#7968f1;color:white;width:100%;font-size:15px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:11px}
+.model{
+ background:#1c2232;border:1px solid #30394d;
+ border-radius:13px;padding:13px;
+}
+.model strong{display:block;margin-bottom:7px}
+.status{font-size:11px;color:#a99bff}
+.answer{white-space:pre-wrap;color:#dce0ed;font-size:13px}
+.copy{background:#303950;color:white;font-size:11px;margin-top:10px}
+.section{margin-top:27px}
+footer{text-align:center;color:#788197;font-size:11px;margin:30px 0}
+</style>
+</head>
+<body>
+
+<header>
+ <div class="logo">✦</div>
+ <div>
+  <h1>NEXUS AI</h1>
+  <div class="sub">MULTI-MODEL COMMAND CENTRE</div>
+ </div>
+</header>
+
+<h2>One prompt.<br><span class="purple">Four AI minds.</span></h2>
+<p>Ask once. Compare four independent AI responses.</p>
+
+<div class="panel">
+ <textarea id="prompt" placeholder="Ask anything..."></textarea>
+ <button class="ask" onclick="askAll()">✦ Send to all 4 AIs</button>
+</div>
+
+<div class="section">
+ <h3>YOUR AI TEAM</h3>
+ <div class="grid">
+  <div class="model"><strong>✧ Gemini</strong><span class="status">● Ready to connect</span></div>
+  <div class="model"><strong>◉ ChatGPT</strong><span class="status">● Ready to connect</span></div>
+  <div class="model"><strong>✦ Claude</strong><span class="status">● Ready to connect</span></div>
+  <div class="model"><strong>⌘ DeepSeek</strong><span class="status">● Ready to connect</span></div>
+ </div>
+</div>
+
+<div class="section">
+ <h3>FOUR ANSWERS</h3>
+ <div id="answers"></div>
+</div>
+
+<footer>NEXUS AI · YOUR PERSONAL AI WORKSPACE</footer>
+
+<script>
+const models=["Gemini","ChatGPT","Claude","DeepSeek"];
+
+function askAll(){
+ const prompt=document.getElementById("prompt").value.trim();
+ if(!prompt){alert("Please enter a question first.");return;}
+ const area=document.getElementById("answers");
+ area.innerHTML="";
+ models.forEach((name,i)=>{
+  const card=document.createElement("div");
+  card.className="panel";
+  const heading=document.createElement("h3");
+  heading.textContent=String(i+1).padStart(2,"0")+" · "+name;
+  const message=document.createElement("p");
+  message.textContent="AI connection not configured yet. We will connect this model in the next setup step.";
+  card.append(heading,message);
+  area.append(card);
+ });
+ area.scrollIntoView({behavior:"smooth"});
+}
+</script>
+</body>
+</html>
+
